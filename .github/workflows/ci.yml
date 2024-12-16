@@ -28,13 +28,13 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    # Step 4: Install security validation tools
+    # Step 4: Install security validation tools (Bandit, Lynis, Pip-Audit, Safety)
     - name: Install security validation tools
       run: |
         pip install bandit
-        pip install lynis
         pip install pip-audit
         pip install safety
+        sudo apt-get update && sudo apt-get install -y lynis
 
     # Step 5: Set up AWS credentials
     - name: Set up AWS credentials
