@@ -46,8 +46,42 @@ jobs:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src  # Add the src directory to PYTHONPATH
 
+    # Step 6: Run Integration Tests
+    - name: Run integration tests
+      run: pytest tests/test_integration.py --tb=short
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
+        PYTHONPATH: ./src
 
+    # Step 7: Run System Tests
+    - name: Run system tests
+      run: pytest tests/test_system.py --tb=short
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
+        PYTHONPATH: ./src
 
+    # Step 8: Run Performance Tests
+    - name: Run performance tests
+      run: pytest tests/test_performance.py --tb=short
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
+        PYTHONPATH: ./src
 
+    # Step 9: Run Security Tests (e.g. Bandit)
+    - name: Run security validation tests
+      run: |
+        bandit -r ./src -o bandit_report.txt
+        cat bandit_report.txt  # Show the report in the output
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
 
+    # Step 10: Run Dependency Scanning (e.g. Safety, Pip-audit)
+    - name: Run dependency vulnerability scan (Safety & Pip-audit)
+      run: |
+        safety check --full-report > safety_report.txt
+        pip-audit --output pip_audit_report.txt
+        cat safety_report.txt
+        cat pip_audit_report.txt
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
 
