@@ -94,7 +94,7 @@ jobs:
     #     PYTHONPATH: ./src
         
     # Step 10: Run Security Validation Tests (pip-audit)         
-    - name: Run security validation tests
+    - name: Run Security Validation Tests (pip-audit)
       run: |
          pip-audit 
         # safety check 
@@ -102,14 +102,14 @@ jobs:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src
     # Step 11: Run Security Validation Tests(safety check)       
-    - name: Run security validation tests
+    - name: Run Security Validation Tests(safety check) 
       run: |
          safety check 
       env:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src
     # Step 12: Run Security Validation Tess(Bandit)       
-    - name: Run security validation tests
+    - name: Run Security Validation Tess(Bandit)
       run: |
          echo "Banit runs successfully..." 
       env:
