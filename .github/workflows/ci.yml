@@ -115,7 +115,14 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-
+        
+    # Step : Set up AWS credentials
+    - name: Set up AWS credentials
+      run: |
+        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws configure set default.region us-east-1
+        
     # Step 4: Prepare test environment
     - name: Prepare test environment
       run: |
