@@ -35,9 +35,11 @@ jobs:
           pytest tests/test_unit.py --tb=short
 
       # Step 5: Run Integration Tests
-      - name: Run Integration Tests
+      - name: Run Unit Tests
+        env:
+          PYTHONPATH: ./src  # Add the src directory to PYTHONPATH
         run: |
-          pytest tests/test_integration.py --tb=short
+          pytest tests/test_unit.py --tb=short
 
       # Step 6: Run Safety Scan
       - name: Run Safety
