@@ -180,21 +180,21 @@ jobs:
 
     # Step 6: Run Lynis Security Validation
     - name: Run Lynis security validation
-      run: lynis audit system --report-file=lynis_report.html
+      run: lynis audit system 
       env:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src
 
     # Step 7: Run pip-audit
     - name: Run pip-audit
-      run: pip-audit --output=pip_audit_report.json
+      run: pip-audit 
       env:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src
 
     # Step 8: Run Safety check
     - name: Run Safety check
-      run: safety check --output safety_report.json
+      run: safety check 
       env:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src
