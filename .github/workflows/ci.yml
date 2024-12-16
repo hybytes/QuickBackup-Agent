@@ -33,15 +33,21 @@ jobs:
       run: |
         mkdir -p /tmp/testdir
         echo "test content" > /tmp/testdir/testfile.txt
-        mkdir -p /etc/quickbackup
-        echo "backup_paths: ['/tmp/testdir']" > /etc/quickbackup/config.yml
-        echo "s3_bucket: 'hybytes-rpm-repo'" >> /etc/quickbackup/config.yml
+        mkdir -p /tmp/quickbackup
+        echo "backup_paths: ['/tmp/testdir']" > /tmp/quickbackup/config.yml
+        echo "s3_bucket: 'hybytes-rpm-repo'" >> /tmp/quickbackup/config.yml
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
 
     # Step 5: Run Unit Tests
     - name: Run unit tests
-      env:
-        PYTHONPATH: ./src  # Add the src directory to PYTHONPATH
       run: pytest tests/test_unit.py --tb=short
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
+        PYTHONPATH: ./src  # Add the src directory to PYTHONPATH
+
+
+
 
 
 
