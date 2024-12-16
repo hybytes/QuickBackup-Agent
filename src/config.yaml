@@ -1,0 +1,3 @@
+backup_paths:
+  - /home/ec2-user/testdir
+s3_bucket: hybytes-rpm-repo
