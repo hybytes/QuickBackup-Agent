@@ -31,33 +31,8 @@ jobs:
 
       # Step 4: Run Unit Tests
       - name: Run Unit Tests
-        run: |
-          pytest tests/test_unit.py --tb=short
-
-      # Step 5: Run Integration Tests
-      - name: Run Unit Tests
         env:
           PYTHONPATH: ./src  # Add the src directory to PYTHONPATH
         run: |
           pytest tests/test_unit.py --tb=short
 
-      # Step 6: Run Safety Scan
-      - name: Run Safety
-        run: |
-          safety check --full-report > safety_report.txt
-          cat safety_report.txt
-
-      # Step 7: Run Pip-Audit
-      - name: Run Pip-Audit
-        run: |
-          pip-audit --output pip_audit_report.json
-          cat pip_audit_report.json
-
-      # Step 8: Upload Logs as Artifacts (Optional)
-      - name: Upload Logs
-        uses: actions/upload-artifact@v3
-        with:
-          name: security-reports
-          path: |
-            safety_report.txt
-            pip_audit_report.json
