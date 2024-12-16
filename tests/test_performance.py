@@ -5,7 +5,7 @@ from backup import backup_to_s3
 
 # Performance Test 1: Backup Speed for Large Directory
 def test_large_directory_backup():
-    large_dir = "/home/ec2-user/large_test_dir"
+    large_dir = "/tmp/large_test_dir"
     os.makedirs(large_dir, exist_ok=True)
     # Create 1000 dummy files
     for i in range(1000):
@@ -29,8 +29,8 @@ def test_large_directory_backup():
 
 # Performance Test 2: Backup with Multiple Directories
 def test_multiple_directories_backup():
-    dir1 = "/home/ec2-user/testdir1"
-    dir2 = "/home/ec2-user/testdir2"
+    dir1 = "/tmp/testdir1"
+    dir2 = "/tmp/testdir2"
     os.makedirs(dir1, exist_ok=True)
     os.makedirs(dir2, exist_ok=True)
 
@@ -59,7 +59,7 @@ def test_multiple_directories_backup():
 
 # Performance Test 3: Stress Test for Frequent Backups
 def test_frequent_backups():
-    test_dir = "/home/ec2-user/frequent_test_dir"
+    test_dir = "/tmp/frequent_test_dir"
     os.makedirs(test_dir, exist_ok=True)
     with open(f"{test_dir}/file.txt", "w") as f:
         f.write("This is a test file.\n")
@@ -80,7 +80,7 @@ def test_frequent_backups():
 
 # Performance Test 4: Large File Upload
 def test_large_file_upload():
-    large_dir = "/home/ec2-user/large_file_test"
+    large_dir = "/tmp/large_file_test"
     os.makedirs(large_dir, exist_ok=True)
     large_file = f"{large_dir}/large_file.txt"
     with open(large_file, "w") as f:
