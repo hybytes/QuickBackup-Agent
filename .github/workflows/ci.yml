@@ -1,1 +1,61 @@
-a
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-and-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set Up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Step 3: Install Dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Step 4: Run Unit Tests
+      - name: Run Unit Tests
+        run: |
+          pytest tests/test_unit.py --tb=short
+
+      # Step 5: Run Integration Tests
+      - name: Run Integration Tests
+        run: |
+          pytest tests/test_integration.py --tb=short
+
+      # Step 6: Run Safety Scan
+      - name: Run Safety
+        run: |
+          safety check --full-report > safety_report.txt
+          cat safety_report.txt
+
+      # Step 7: Run Pip-Audit
+      - name: Run Pip-Audit
+        run: |
+          pip-audit --output pip_audit_report.json
+          cat pip_audit_report.json
+
+      # Step 8: Upload Logs as Artifacts (Optional)
+      - name: Upload Logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-reports
+          path: |
+            safety_report.txt
+            pip_audit_report.json
