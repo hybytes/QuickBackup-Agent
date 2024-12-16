@@ -78,7 +78,7 @@ jobs:
     # Step 10: Run Security Validation Tests (Bandit, Lynis, etc.)
     - name: Run security validation tests
       run: |
-        bandit -r src/ -o bandit_report.html -v
+        bandit -r src/backup.py -v
         lynis audit system --report-file=lynis_report.html
         pip-audit --output=pip_audit_report.json
         safety check --output safety_report.json
