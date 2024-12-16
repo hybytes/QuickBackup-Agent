@@ -59,3 +59,28 @@ jobs:
       env:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src  # Add the src directory to PYTHONPATH
+
+    # Step 8: Run System Tests
+    - name: Run system tests
+      run: pytest tests/test_system.py --tb=short
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
+        PYTHONPATH: ./src
+
+    # Step 9: Run Performance Tests
+    - name: Run performance tests
+      run: pytest tests/test_performance.py --tb=short
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
+        PYTHONPATH: ./src
+
+    # Step 10: Run Security Validation Tests (Bandit, Lynis, etc.)
+    - name: Run security validation tests
+      run: |
+        bandit -r src/ -o bandit_report.html
+        lynis audit system --report-file=lynis_report.html
+        pip-audit --output=pip_audit_report.json
+        safety check --output safety_report.json
+      env:
+        CONFIG_PATH: /tmp/quickbackup/config.yml
+        PYTHONPATH: ./src
