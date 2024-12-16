@@ -7,7 +7,7 @@ from backup import load_config, backup_to_s3
 # Integration Test Case 1: Backup a valid directory and upload to S3
 def test_integration_valid_backup():
     # Setup: Create a test directory and file
-    test_dir = "/home/ec2-user/testdir"
+    test_dir = "/tmp/testdir"
     test_file = os.path.join(test_dir, "test.txt")
     os.makedirs(test_dir, exist_ok=True)
     with open(test_file, "w") as f:
