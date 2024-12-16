@@ -75,13 +75,13 @@ jobs:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src
 
-    # Step 10: Run Security Validation Tests (Bandit, Lynis, etc.)
-    - name: Run security validation tests
-      run: |
-        bandit -r src/backup.py -v
-      env:
-        CONFIG_PATH: /tmp/quickbackup/config.yml
-        PYTHONPATH: ./src
+    # Step 10: Run S bandit Tests (Bandit, Lynis, etc.)
+    # - name: Run security validation tests
+    #   run: |
+    #     bandit -r src/backup.py -v
+    #   env:
+    #     CONFIG_PATH: /tmp/quickbackup/config.yml
+    #     PYTHONPATH: ./src
     # Step 10: Run Security Validation Tests (Bandit, Lynis, etc.)
     - name: Run security validation tests
       run: |
