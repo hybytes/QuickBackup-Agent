@@ -5,7 +5,7 @@ from datetime import datetime
 import time
 
 # Load configuration
-CONFIG_PATH = "/etc/quickbackup/config.yml"
+CONFIG_PATH = "/tmp/quickbackup/config.yml"
 
 def load_config():
     """
