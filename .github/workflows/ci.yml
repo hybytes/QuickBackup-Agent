@@ -79,9 +79,9 @@ jobs:
     - name: Run security validation tests
       run: |
         bandit -r src/backup.py -v
-        lynis audit system --report-file=lynis_report.html
-        pip-audit --output=pip_audit_report.json
-        safety check --output safety_report.json
+        lynis audit system 
+        pip-audit 
+        safety check 
       env:
         CONFIG_PATH: /tmp/quickbackup/config.yml
         PYTHONPATH: ./src
